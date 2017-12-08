@@ -1,0 +1,23 @@
+$OpenBSD$
+
+Hardlink man pages.
+
+Index: doc/Makefile.in
+--- doc/Makefile.in.orig
++++ doc/Makefile.in
+@@ -969,13 +969,13 @@ install-data-hook:
+ 	for i in $(GIT_GREPS);\
+ 	do\
+ 	    rm -f $(DESTDIR)$(mandir)/man1/$${i}.1;\
+-	    ln -s $(mandir)/man1/gitrgrep.1 $(DESTDIR)$(mandir)/man1/$${i}.1;\
++	    ln gitrgrep.1 $(DESTDIR)$(mandir)/man1/$${i}.1;\
+ 	done
+ 	\
+ 	for i in $(GIT_INTERNAL_MANS);\
+ 	do\
+ 	    rm -f $(DESTDIR)$(mandir)/man1/$${i}.1;\
+-	    ln -s $(mandir)/man1/gitinternal.1 $(DESTDIR)$(mandir)/man1/$${i}.1;\
++	    ln gitinternal.1 $(DESTDIR)$(mandir)/man1/$${i}.1;\
+ 	done
+ 	if [ "$(mandir)" != "$(prefix)/man" ]; then\
+ 	    for i in $(ORIG_MANS) $(GIT_INTERNAL_MANS); \

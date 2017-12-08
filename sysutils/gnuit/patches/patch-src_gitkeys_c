@@ -1,0 +1,46 @@
+$OpenBSD$
+
+Don't conflict with ncurses ospeed.
+
+Index: src/gitkeys.c
+--- src/gitkeys.c.orig
++++ src/gitkeys.c
+@@ -72,9 +72,9 @@
+ 
+ 
+ #ifdef HAVE_LINUX
+-speed_t ospeed;
++speed_t eospeed;
+ #else   /* !HAVE_LINUX */
+-short ospeed;
++short eospeed;
+ #endif  /* !HAVE_LINUX */
+ 
+ 
+@@ -198,7 +198,7 @@ tty_init()
+ #endif
+ 
+ 	tcsetattr(TTY_OUTPUT, TCSADRAIN, &new_term);
+-	ospeed = cfgetospeed(&new_term);
++	eospeed = cfgetospeed(&new_term);
+ #else
+ #ifdef HAVE_SYSTEMV_TTY
+ 	ioctl(TTY_OUTPUT, TCGETA, &old_term);
+@@ -272,7 +272,7 @@ tty_init()
+ #endif
+ 
+ 	ioctl(TTY_OUTPUT, TCSETAW, &new_term);
+-	ospeed = new_term.c_cflag & CBAUD;
++	eospeed = new_term.c_cflag & CBAUD;
+ #else
+ 	ioctl(TTY_OUTPUT, TIOCGETP, &old_arg);
+ 	ioctl(TTY_OUTPUT, TIOCGETC, &old_targ);
+@@ -299,7 +299,7 @@ tty_init()
+ 	ioctl(TTY_OUTPUT, TIOCSETN, &new_arg);
+ 	ioctl(TTY_OUTPUT, TIOCSETC, &new_targ);
+ 	ioctl(TTY_OUTPUT, TIOCSLTC, &new_ltarg);
+-	ospeed = new_arg.sg_ospeed;
++	eospeed = new_arg.sg_eospeed;
+ #endif /* HAVE_SYSTEMV_TTY */
+ #endif /* HAVE_POSIX_TTY */
+ 

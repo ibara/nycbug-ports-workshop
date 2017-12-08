@@ -1,0 +1,15 @@
+aee (another easy editor) is intended to be a simple, easy to use
+terminal-based screen oriented editor that requires no instruction to
+use. The intended audience for aee ranges from people who are new to
+computers to experienced software developers.
+
+aee's simplified interface is highlighted by the use of pop-up menus
+which make it possible for users to carry out tasks without the need to
+remember commands. An information window at the top of the screen shows
+the user the operations available with control-keys.
+
+aee allows users to use full eight-bit characters.
+
+aee comes with two editors:
+* aee, a curses-based editor
+* xae, an X11-based editor

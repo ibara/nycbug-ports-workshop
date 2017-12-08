@@ -1,0 +1,46 @@
+$OpenBSD$
+
+Don't conflict with ncurses ospeed.
+
+Index: src/tty.c
+--- src/tty.c.orig
++++ src/tty.c
+@@ -263,9 +263,9 @@ char *BC;       /* For tgoto/tparm.  */
+ char *UP;
+ 
+ #ifdef HAVE_LINUX
+-speed_t ospeed;
++speed_t eospeed;
+ #else /* !HAVE_LINUX */
+-short ospeed;
++short eospeed;
+ #endif /* !HAVE_LINUX */
+ 
+ 
+@@ -625,7 +625,7 @@ tty_set_mode(mode)
+ #endif
+ 
+ 	tcsetattr(TTY_OUTPUT, TCSADRAIN, &new_term);
+-	ospeed = cfgetospeed(&new_term);
++	eospeed = cfgetospeed(&new_term);
+ #else
+ #ifdef HAVE_SYSTEMV_TTY
+ 	new_term = old_term;
+@@ -697,7 +697,7 @@ tty_set_mode(mode)
+ #endif
+ 
+ 	ioctl(TTY_OUTPUT, TCSETAW, &new_term);
+-	ospeed = new_term.c_cflag & CBAUD;
++	eospeed = new_term.c_cflag & CBAUD;
+ #else
+ 	new_arg   = old_arg;
+ 	new_targ  = old_targ;
+@@ -720,7 +720,7 @@ tty_set_mode(mode)
+ 	ioctl(TTY_OUTPUT, TIOCSETN, &new_arg);
+ 	ioctl(TTY_OUTPUT, TIOCSETC, &new_targ);
+ 	ioctl(TTY_OUTPUT, TIOCSLTC, &new_ltarg);
+-	ospeed = new_arg.sg_ospeed;
++	eospeed = new_arg.sg_eospeed;
+ #endif /* HAVE_SYSTEMV_TTY */
+ #endif /* HAVE_POSIX_TTY */
+ 

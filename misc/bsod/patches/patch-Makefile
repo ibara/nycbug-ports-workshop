@@ -1,0 +1,26 @@
+$OpenBSD$
+
+Do not hardcode optimization flags.
+Proper install routine.
+
+Index: Makefile
+--- Makefile.orig
++++ Makefile
+@@ -2,7 +2,7 @@ VERSION=0.1
+ 
+ DEBUG=-g -pedantic #-pg #-fprofile-arcs
+ LDFLAGS=-lncurses $(DEBUG)
+-CFLAGS+=-O2 -Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
++CFLAGS+=-Wall -DVERSION=\"$(VERSION)\" $(DEBUG)
+ 
+ OBJS=bsod.o
+ 
+@@ -12,7 +12,7 @@ bsod: $(OBJS)
+ 	$(CC) -Wall $(OBJS) $(LDFLAGS) -o bsod
+ 
+ install: bsod
+-	cp bsod $(DESTDIR)/usr/local/bin
++	install -c -S -s -m 755 bsod $(PREFIX)/bin
+ 
+ uninstall: clean
+ 	rm -f $(DESTDIR)/usr/local/bin/bsod

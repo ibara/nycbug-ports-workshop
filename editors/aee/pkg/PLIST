@@ -1,0 +1,6 @@
+@comment $OpenBSD$
+@bin bin/aee
+@bin bin/xae
+@man man/man1/aee.1
+share/aee/
+share/aee/help.ae
