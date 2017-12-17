@@ -1,0 +1,10 @@
+bblame is an interactive ncurses git blame viewer. Allowing you to
+explore the git history of a file.
+
+Features:
+* Browse forwards and backwards through file history a commit at a time
+* Select a line and drill into the history past the commit that changed
+  that line most recently
+* Full code syntax highlighting support
+* Display the git show for the commit of any selected line
+* Browse file history across file renames
